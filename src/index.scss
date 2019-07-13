@@ -4,98 +4,110 @@
   margin: 0;
 }
 
-body {
-  background-color: #fe4663;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  margin: 0;
-  transition-duration: 1s;
-  transition-timing-function: cubic-bezier(0.8, 0, 0.3, 1);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-animation: firstBg 3s alternate infinite ease;
-}
+html {
+  height: 100%;
+  width: 100%;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-@keyframes firstBg {
-  0% {
+  body {
     background-color: #fe4663;
-  }
-  100% {
-    background-color: #fe6646;
-  }
-}
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+    height: 100%;
+    margin: 0;
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(0.8, 0, 0.3, 1);
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-animation: firstBg 3s alternate infinite ease;
 
-@keyframes secondBg {
-  0% {
+    #root {
+      height: 100%;
+    }
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+
+  @keyframes firstBg {
+    0% {
+      background-color: #fe4663;
+    }
+    100% {
+      background-color: #fe6646;
+    }
+  }
+
+  @keyframes secondBg {
+    0% {
+      background-color: #4070f0;
+    }
+    100% {
+      background-color: #8540f0;
+    }
+  }
+
+  body.step2 {
     background-color: #4070f0;
   }
-  100% {
-    background-color: #8540f0;
+
+  body.step2 .sec-bg {
+    opacity: 1;
   }
-}
 
-body.step2 {
-  background-color: #4070f0;
-}
+  body.step2 nav ol li {
+    color: #4070f0;
+  }
 
-body.step2 .sec-bg {
-  opacity: 1;
-}
+  body.step2 .login-wrapper.first {
+    opacity: 0;
+    -webkit-transform: translateX(-100%);
+  }
 
-body.step2 nav ol li {
-  color: #4070f0;
-}
+  body.step2 .login-wrapper.second {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
 
-body.step2 .login-wrapper.first {
-  opacity: 0;
-  -webkit-transform: translateX(-100%);
-}
+  body.step2 .login-wrapper.second form {
+    -webkit-animation: fadeUp 1s 1s 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+  }
 
-body.step2 .login-wrapper.second {
-  opacity: 1;
-  -webkit-transform: translateX(0);
-}
+  body.step2 .login-wrapper.third {
+    opacity: 1;
+    -webkit-transform: translateX(100%);
+  }
 
-body.step2 .login-wrapper.second form {
-  -webkit-animation: fadeUp 1s 1s 1;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
+  body.step3 {
+    background-color: #e6e9ec;
+  }
 
-body.step2 .login-wrapper.third {
-  opacity: 1;
-  -webkit-transform: translateX(100%);
-}
+  body.step3 .sec-bg {
+    opacity: 0;
+  }
 
-body.step3 {
-  background-color: #e6e9ec;
-}
+  body.step3 nav ol li {
+    color: #fe4663;
+  }
 
-body.step3 .sec-bg {
-  opacity: 0;
-}
+  body.step3 .login-wrapper.first {
+    opacity: 0;
+    -webkit-transform: translateX(-100%);
+  }
 
-body.step3 nav ol li {
-  color: #fe4663;
-}
+  body.step3 .login-wrapper.second {
+    opacity: 1;
+    -webkit-transform: translateX(-100%);
+  }
 
-body.step3 .login-wrapper.first {
-  opacity: 0;
-  -webkit-transform: translateX(-100%);
-}
-
-body.step3 .login-wrapper.second {
-  opacity: 1;
-  -webkit-transform: translateX(-100%);
-}
-
-body.step3 .login-wrapper.third {
-  opacity: 1;
-  -webkit-transform: translateX(0);
+  body.step3 .login-wrapper.third {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
 }

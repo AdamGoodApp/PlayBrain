@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Authorization from "./authorization";
-import "typeface-roboto";
+import Container from "@material-ui/core/Container";
 
-import "./App.css";
+import "typeface-roboto";
+import "./App.scss";
 
 const App: React.FC = () => {
   return (
@@ -14,9 +15,9 @@ const App: React.FC = () => {
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
       </header>
-      <div>
+      <Container className="app-container" maxWidth="xl">
         <Route path="/" exact component={Authorization} />
-      </div>
+      </Container>
     </Router>
   );
 };
