@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { login } from "../../redux/actions";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
@@ -30,8 +32,10 @@ class Authorization extends Component<any, State> {
   };
 
   handleSubmit = (event: any) => {
-    console.log("Submitting");
-    event.preventDefault();
+    const { username, password } = this.state;
+    const { login } = this.props;
+
+    login({ username: username, password: password });
   };
 
   render() {
@@ -44,7 +48,7 @@ class Authorization extends Component<any, State> {
             Login
           </Typography>
 
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <TextField
               required
               fullWidth
@@ -71,7 +75,7 @@ class Authorization extends Component<any, State> {
             />
 
             <div style={{ marginTop: 40, textAlign: "center" }}>
-              <Fab color="primary" aria-label="Add">
+              <Fab color="primary" aria-label="Add" onClick={this.handleSubmit}>
                 <FaceIcon />
               </Fab>
             </div>
@@ -82,4 +86,19 @@ class Authorization extends Component<any, State> {
   }
 }
 
-export default Authorization;
+const mapDispatchToProps = {
+  login
+};
+
+export default connect(
+  (state: any) => {
+    const {
+      app: { user }
+    } = state;
+
+    return {
+      user
+    };
+  },
+  mapDispatchToProps
+)(Authorization);
