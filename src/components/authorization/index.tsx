@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 import FaceIcon from "@material-ui/icons/Face";
+import { userType } from "../../lib/auth";
 
 import "./index.scss";
 
@@ -18,7 +19,8 @@ class Authorization extends Component<any, State> {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      type: ""
     };
   }
 
@@ -35,11 +37,13 @@ class Authorization extends Component<any, State> {
     const { username, password } = this.state;
     const { login } = this.props;
 
-    login({ username: username, password: password });
+    login({ username: username, password: password, type: userType(username) });
   };
 
   render() {
     const { username, password } = this.state;
+
+    console.log(this.props);
 
     return (
       <div className="auth-container">

@@ -3,7 +3,8 @@ import { LOGIN } from "./actionTypes";
 const initialState = {
   user: {
     username: null,
-    password: null
+    password: null,
+    type: null
   }
 };
 
