@@ -43,8 +43,6 @@ class Authorization extends Component<any, State> {
   render() {
     const { username, password } = this.state;
 
-    console.log(this.props);
-
     return (
       <div className="auth-container">
         <div className="login-form">
