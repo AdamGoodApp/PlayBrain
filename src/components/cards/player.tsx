@@ -3,18 +3,23 @@ import React, { Component } from "react";
 import "./index.scss";
 
 interface Props {
-  regions: Array<Region>;
-  setRegion: any;
+  players: any;
 }
 
-interface Region {
-  id: Number;
-  region: String;
-  brand: String;
-  crest: String;
+interface Player {
+  teams: String;
+  participantId: String;
+  nickname: String;
+  country: String;
+  gamerTagBattlenetServer: String;
+  message: String;
+  gamerTag: String;
+  likeCount: Number;
+  owner: String;
+  avatarUrl: String;
 }
 
-class Card extends Component<Props, any> {
+class Player extends Component<Props, any> {
   constructor(props: Props) {
     super(props);
   }
@@ -41,7 +46,7 @@ class Card extends Component<Props, any> {
     </div>
   );
 
-  Card = ({ crest, brand, region }: any) => (
+  Card = ({ crest, brand, region, name }: any) => (
     <div className="card">
       <div className="bg" />
       <div className="card-front-img">
@@ -50,18 +55,14 @@ class Card extends Component<Props, any> {
       <div className="card-info">
         <div className="card-info-section">
           <div className="card-info__faction">
-            <div className="card-info__name">Region</div>
-            <div className="card-info__region">{region}</div>
+            <div className="card-info__name">Name</div>
+            <div className="card-info__region">{name}</div>
           </div>
           <div className="card-info__crest">
             <img src={crest} />
           </div>
         </div>
-        <div
-          className="see-more"
-          onClick={() => this.onCardClick(region)}
-          style={{ cursor: "pointer" }}
-        >
+        <div className="see-more" style={{ cursor: "pointer" }}>
           View Region
           <this.Arrow />
         </div>
@@ -69,22 +70,18 @@ class Card extends Component<Props, any> {
     </div>
   );
 
-  onCardClick = (region: String) => {
-    const { setRegion } = this.props;
-    setRegion(region);
-  };
-
   render() {
-    const reg = this.props.regions;
+    const players = this.props.players;
 
     return (
-      <div className="card-container">
-        {reg.map((x: Region) => (
+      <div className="card-container player-container">
+        {players.map((x: Player) => (
           <this.Card
-            key={x.id}
-            crest={x.crest}
-            brand={x.brand}
-            region={x.region}
+            key={x.participantId}
+            crest={x.avatarUrl}
+            brand={x.avatarUrl}
+            region={x.country}
+            name={x.nickname}
           />
         ))}
       </div>
@@ -92,4 +89,4 @@ class Card extends Component<Props, any> {
   }
 }
 
-export default Card;
+export default Player;
