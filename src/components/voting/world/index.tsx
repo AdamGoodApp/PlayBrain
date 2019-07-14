@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
-import { regions, playersMock } from "../../../lib/data";
+import { regions } from "../../../lib/data";
 import Card from "../../cards";
 import Player from "../../cards/player";
 
@@ -34,7 +34,7 @@ class World extends Component<any, State> {
 
         <Card regions={regions} setRegion={this.setRegion} />
 
-        {selectedRegion && <Player players={playersMock} />}
+        {selectedRegion && <Player region={selectedRegion} />}
       </div>
     );
   }

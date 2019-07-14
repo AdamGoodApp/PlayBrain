@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Players } from "../../lib/filterPlayers";
 
 import "./index.scss";
 
 interface Props {
-  players: any;
+  region: String;
 }
 
 interface Player {
@@ -46,7 +47,7 @@ class Player extends Component<Props, any> {
     </div>
   );
 
-  Card = ({ crest, brand, region, name }: any) => (
+  Card = ({ crest, brand, region, name, votes }: any) => (
     <div className="card">
       <div className="bg" />
       <div className="card-front-img">
@@ -58,9 +59,7 @@ class Player extends Component<Props, any> {
             <div className="card-info__name">Name</div>
             <div className="card-info__region">{name}</div>
           </div>
-          <div className="card-info__crest">
-            <img src={crest} />
-          </div>
+          <div className="card-info__crest">{votes}</div>
         </div>
         <div className="see-more" style={{ cursor: "pointer" }}>
           View Region
@@ -71,17 +70,19 @@ class Player extends Component<Props, any> {
   );
 
   render() {
-    const players = this.props.players;
+    const { region } = this.props;
+    const players = Players(region);
 
     return (
       <div className="card-container player-container">
-        {players.map((x: Player) => (
+        {players.map((x: any) => (
           <this.Card
             key={x.participantId}
             crest={x.avatarUrl}
             brand={x.avatarUrl}
             region={x.country}
             name={x.nickname}
+            votes={x.likeCount}
           />
         ))}
       </div>
