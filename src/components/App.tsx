@@ -1,7 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Authorization from "./authorization";
 import Container from "@material-ui/core/Container";
+import Authorization from "./authorization";
+import Voting from "./voting";
+import World from "./voting/world";
+import Results from "./voting/results";
 
 import "typeface-roboto";
 import "./App.scss";
@@ -17,6 +20,9 @@ const App: React.FC = () => {
       </header>
       <Container className="app-container" maxWidth="xl">
         <Route path="/" exact component={Authorization} />
+        <Route path="/voting" exact component={Voting} />
+        <Route path="/world" exact component={World} />
+        <Route path="/results" exact component={Results} />
       </Container>
     </Router>
   );

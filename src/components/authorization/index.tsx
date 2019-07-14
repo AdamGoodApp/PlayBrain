@@ -33,11 +33,15 @@ class Authorization extends Component<any, State> {
     });
   };
 
+  // Login user and add to Redux
+  // Then navigate to the voting section
   handleSubmit = (event: any) => {
     const { username, password } = this.state;
-    const { login } = this.props;
+    const { login, history } = this.props;
 
     login({ username: username, password: password, type: userType(username) });
+
+    history.push("/voting");
   };
 
   render() {
@@ -93,14 +97,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  (state: any) => {
-    const {
-      app: { user }
-    } = state;
-
-    return {
-      user
-    };
-  },
+  null,
   mapDispatchToProps
 )(Authorization);
