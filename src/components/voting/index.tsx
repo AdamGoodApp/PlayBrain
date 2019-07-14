@@ -12,7 +12,7 @@ class Voting extends Component<any, any> {
     } else if (userType === "USER") {
       return <World />;
     } else {
-      return <Results />;
+      return <World />;
     }
   };
 
