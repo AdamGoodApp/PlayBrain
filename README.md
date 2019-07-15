@@ -1,44 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# PlayBrain
+
+## Specs
+
+1. A user can vote for up to 3 players in total from 1 region. Those 3 players should belong to the chosen country only, and multiple countries cannot be voted for.
+
+2. An admin user can close the voting.
+   Non-logged users cannot access the voting but can see options and results.
+
+3. Once the voting is closed, no user will be able to vote anymore, but instead they will be able to see the percentage of votes for each participant.
+
+4. There is no need to make a login system for the purpose of this test. It is possible to mock the user and admin user. The admin user can have a button to close the voting.
+
+5. The data of the application can be found in the snippet, and should be used when calculating the percentage of votes.
+
+## Guide
+
+### Login
+
+Root directory has login functionality.
+
+Username **adamgoodapp** has admin rights, username **michael** has normal user priveladges and anyone else will be set as a guest.
+
+## Future changes
+
+Currently the voting and results are handled by one Component, **Player**.
+
+The results and voting functionality should be split into seperate files and routing should add seperate routes to give the user a better guided experince, for example the User can choose a region first and then be guided to voting as a seperate screen. This will also further cut the Player component complexity down.
+
+## Built with
+
+**React**
+
+**Redux**
+
+**TypeScript**
+
+**Jest**
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `yarn start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
+### `yarn test`
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
