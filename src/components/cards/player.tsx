@@ -103,11 +103,19 @@ class Player extends Component<Props, State> {
   onCardClick = (region: string, playerID: string) => {
     const voteCount = this.state.voted.length;
 
-    if (voteCount < 3 && region === this.state.region) {
-      this.setState({
-        voted: [...this.state.voted, playerID]
+    if (this.state.voted.includes(playerID)) {
+      return this.setState({
+        voted: this.state.voted.filter(item => item !== playerID)
       });
+    } else if (voteCount < 3 && region === this.state.region) {
+      return this.setState({ voted: [...this.state.voted, playerID] });
     }
+
+    // if (voteCount < 3 && region === this.state.region) {
+    //   this.setState({
+    //     voted: cleanedArray
+    //   });
+    // }
   };
 
   render() {
