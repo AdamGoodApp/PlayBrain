@@ -7,6 +7,10 @@ const regionEnum = {
   "South East Asia": "sea"
 };
 
+export const cleanRegion = region => {
+  return regionEnum[region];
+};
+
 // Times by -1 to order by DESC
 const compare = (a, b) => {
   if (a.likeCount < b.likeCount) {

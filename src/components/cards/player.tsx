@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import StarRate from "@material-ui/icons/StarRate";
-import { Players } from "../../lib/filterPlayers";
+import { Players, cleanRegion } from "../../lib/filterPlayers";
 
 import "./index.scss";
 
@@ -31,7 +31,7 @@ class Player extends Component<Props, State> {
     super(props);
 
     this.state = {
-      region: null,
+      region: cleanRegion(this.props.region),
       voted: []
     };
   }
@@ -98,12 +98,13 @@ class Player extends Component<Props, State> {
     );
   };
 
+  // Handle vote locking by making sure user cant vote in multiple regions
+  // and cant vote more than three times
   onCardClick = (region: string, playerID: string) => {
     const voteCount = this.state.voted.length;
 
-    if (voteCount < 3) {
+    if (voteCount < 3 && region === this.state.region) {
       this.setState({
-        region: region,
         voted: [...this.state.voted, playerID]
       });
     }
