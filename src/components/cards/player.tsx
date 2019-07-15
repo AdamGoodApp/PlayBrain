@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import StarRate from "@material-ui/icons/StarRate";
 import Typography from "@material-ui/core/Typography";
 import { Players, cleanRegion } from "../../lib/filterPlayers";
@@ -7,6 +8,7 @@ import "./index.scss";
 
 interface Props {
   region: String;
+  user: { type: String; username: String; password: String };
 }
 
 interface State {
@@ -66,7 +68,8 @@ class Player extends Component<Props, State> {
     name,
     votes,
     regionCount,
-    playerID
+    playerID,
+    userType
   }: any) => {
     const likePercentage = ((votes / regionCount) * 100).toFixed(2);
     const voted: boolean = this.state.voted.includes(playerID);
@@ -74,7 +77,7 @@ class Player extends Component<Props, State> {
     return (
       <div
         className={"card " + (voted ? "sparkle" : "")}
-        onClick={() => this.onCardClick(region, playerID)}
+        onClick={() => this.onCardClick(region, playerID, userType)}
       >
         <div className="bg" />
         <div className="card-front-img">
@@ -100,21 +103,27 @@ class Player extends Component<Props, State> {
   };
 
   // Handle vote locking by making sure user cant vote in multiple regions
-  // and cant vote more than three times
-  onCardClick = (region: string, playerID: string) => {
+  // and cant vote more than three times. User can only vote if not guest or
+  // voting is not closed by admin
+  onCardClick = (region: string, playerID: string, userType: string) => {
     const voteCount = this.state.voted.length;
 
-    if (this.state.voted.includes(playerID)) {
-      return this.setState({
-        voted: this.state.voted.filter(item => item !== playerID)
-      });
-    } else if (voteCount < 3 && region === cleanRegion(this.state.region)) {
-      return this.setState({ voted: [...this.state.voted, playerID] });
+    if (userType != "GUEST") {
+      if (this.state.voted.includes(playerID)) {
+        return this.setState({
+          voted: this.state.voted.filter(item => item !== playerID)
+        });
+      } else if (voteCount < 3 && region === cleanRegion(this.state.region)) {
+        return this.setState({ voted: [...this.state.voted, playerID] });
+      }
     }
   };
 
   render() {
-    const { region } = this.props;
+    const {
+      region,
+      user: { type }
+    } = this.props;
     const voteCount = this.state.voted.length;
     const { players, regionCount } = Players(region);
 
@@ -135,6 +144,7 @@ class Player extends Component<Props, State> {
               votes={x.likeCount}
               regionCount={regionCount}
               playerID={x.participantId}
+              userType={type}
             />
           ))}
         </div>
@@ -143,4 +153,12 @@ class Player extends Component<Props, State> {
   }
 }
 
-export default Player;
+export default connect((state: any) => {
+  const {
+    app: { user }
+  } = state;
+
+  return {
+    user
+  };
+})(Player);
