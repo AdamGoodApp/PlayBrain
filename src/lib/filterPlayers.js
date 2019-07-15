@@ -18,10 +18,18 @@ const compare = (a, b) => {
   return 0;
 };
 
+const calcTotalVotes = (items, prop) => {
+  return items.reduce((a, b) => {
+    return a + b[prop];
+  }, 0);
+};
+
 const filterByRegion = region => {
   const area = regionEnum[region];
+  const players = playersMock.filter(player => player.teams == area);
+  const regionCount = calcTotalVotes(players, "likeCount");
 
-  return playersMock.filter(player => player.teams == area);
+  return { players: players, regionCount: regionCount };
 };
 
 const filterByLikes = players => {
@@ -30,7 +38,7 @@ const filterByLikes = players => {
 
 export const Players = region => {
   const filterRegion = filterByRegion(region);
-  const players = filterByLikes(filterRegion);
+  const players = filterByLikes(filterRegion.players);
 
-  return players;
+  return { players: players, regionCount: filterRegion.regionCount };
 };

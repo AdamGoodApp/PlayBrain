@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import StarRate from "@material-ui/icons/StarRate";
 import { Players } from "../../lib/filterPlayers";
 
 import "./index.scss";
@@ -47,31 +48,37 @@ class Player extends Component<Props, any> {
     </div>
   );
 
-  Card = ({ crest, brand, region, name, votes }: any) => (
-    <div className="card">
-      <div className="bg" />
-      <div className="card-front-img">
-        <img src={brand} alt="Brand" />
-      </div>
-      <div className="card-info">
-        <div className="card-info-section">
-          <div className="card-info__faction">
-            <div className="card-info__name">Name</div>
-            <div className="card-info__region">{name}</div>
+  Card = ({ crest, brand, region, name, votes, regionCount }: any) => {
+    const likePercentage = ((votes / regionCount) * 100).toFixed(2);
+
+    return (
+      <div className="card">
+        <div className="bg" />
+        <div className="card-front-img">
+          <img src={brand} alt="Brand" />
+        </div>
+        <div className="card-info">
+          <div className="card-info-section">
+            <div className="card-info__faction">
+              <div className="card-info__name">Name</div>
+              <div className="card-info__region">{name}</div>
+            </div>
+            <div className="card-info__crest">
+              <StarRate />
+              {likePercentage}%
+            </div>
           </div>
-          <div className="card-info__crest">{votes}</div>
-        </div>
-        <div className="see-more" style={{ cursor: "pointer" }}>
-          View Region
-          <this.Arrow />
+          <div className="see-more" style={{ cursor: "pointer" }}>
+            VOTE
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   render() {
     const { region } = this.props;
-    const players = Players(region);
+    const { players, regionCount } = Players(region);
 
     return (
       <div className="card-container player-container">
@@ -83,6 +90,7 @@ class Player extends Component<Props, any> {
             region={x.country}
             name={x.nickname}
             votes={x.likeCount}
+            regionCount={regionCount}
           />
         ))}
       </div>
