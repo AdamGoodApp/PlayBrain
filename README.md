@@ -1,5 +1,9 @@
 # PlayBrain
 
+Project trello board can be viewed [here](https://trello.com/b/XoQ8uAzr/playbrain)
+
+Application can be viewed [here](http://playbrain.s3-website-ap-northeast-1.amazonaws.com/)
+
 ## Specs
 
 1. A user can vote for up to 3 players in total from 1 region. Those 3 players should belong to the chosen country only, and multiple countries cannot be voted for.
