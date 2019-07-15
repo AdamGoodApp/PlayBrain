@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Typography from "@material-ui/core/Typography";
 import { regions } from "../../../lib/data";
 import Card from "../../cards";
 import Player from "../../cards/player";
@@ -28,10 +27,6 @@ class World extends Component<any, State> {
 
     return (
       <div className="world-container">
-        <Typography variant="h2" gutterBottom style={{ textAlign: "center" }}>
-          Select Region
-        </Typography>
-
         <Card regions={regions} setRegion={this.setRegion} />
 
         {selectedRegion && <Player region={selectedRegion} />}

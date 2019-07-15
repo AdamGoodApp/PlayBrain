@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import StarRate from "@material-ui/icons/StarRate";
+import Typography from "@material-ui/core/Typography";
 import { Players, cleanRegion } from "../../lib/filterPlayers";
 
 import "./index.scss";
@@ -31,7 +32,7 @@ class Player extends Component<Props, State> {
     super(props);
 
     this.state = {
-      region: cleanRegion(this.props.region),
+      region: this.props.region,
       voted: []
     };
   }
@@ -107,35 +108,36 @@ class Player extends Component<Props, State> {
       return this.setState({
         voted: this.state.voted.filter(item => item !== playerID)
       });
-    } else if (voteCount < 3 && region === this.state.region) {
+    } else if (voteCount < 3 && region === cleanRegion(this.state.region)) {
       return this.setState({ voted: [...this.state.voted, playerID] });
     }
-
-    // if (voteCount < 3 && region === this.state.region) {
-    //   this.setState({
-    //     voted: cleanedArray
-    //   });
-    // }
   };
 
   render() {
     const { region } = this.props;
+    const voteCount = this.state.voted.length;
     const { players, regionCount } = Players(region);
 
     return (
-      <div className="card-container player-container">
-        {players.map((x: any) => (
-          <this.Card
-            key={x.participantId}
-            crest={x.avatarUrl}
-            brand={x.avatarUrl}
-            region={x.country}
-            name={x.nickname}
-            votes={x.likeCount}
-            regionCount={regionCount}
-            playerID={x.participantId}
-          />
-        ))}
+      <div>
+        <Typography variant="h4" gutterBottom style={{ textAlign: "center" }}>
+          {voteCount} Votes in {this.state.region}
+        </Typography>
+
+        <div className="card-container player-container">
+          {players.map((x: any) => (
+            <this.Card
+              key={x.participantId}
+              crest={x.avatarUrl}
+              brand={x.avatarUrl}
+              region={x.teams}
+              name={x.nickname}
+              votes={x.likeCount}
+              regionCount={regionCount}
+              playerID={x.participantId}
+            />
+          ))}
+        </div>
       </div>
     );
   }
