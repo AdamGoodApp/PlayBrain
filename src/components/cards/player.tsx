@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import StarRate from "@material-ui/icons/StarRate";
 import Typography from "@material-ui/core/Typography";
 import { Players, cleanRegion } from "../../lib/filterPlayers";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -93,8 +92,7 @@ class Player extends Component<Props, State> {
               <div className="card-info__region">{name}</div>
             </div>
             <div className="card-info__crest">
-              <StarRate />
-              {likePercentage}%
+              {this.state.closeVoting && `${likePercentage}%`}
             </div>
           </div>
           <div className="see-more" style={{ cursor: "pointer" }}>
