@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import StarRate from "@material-ui/icons/StarRate";
 import Typography from "@material-ui/core/Typography";
 import { Players, cleanRegion } from "../../lib/filterPlayers";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import "./index.scss";
 
@@ -14,6 +15,7 @@ interface Props {
 interface State {
   region: any;
   voted: Array<String>;
+  closeVoting: boolean;
 }
 
 interface Player {
@@ -35,7 +37,8 @@ class Player extends Component<Props, State> {
 
     this.state = {
       region: this.props.region,
-      voted: []
+      voted: [],
+      closeVoting: false
     };
   }
 
@@ -108,7 +111,7 @@ class Player extends Component<Props, State> {
   onCardClick = (region: string, playerID: string, userType: string) => {
     const voteCount = this.state.voted.length;
 
-    if (userType != "GUEST") {
+    if (userType != "GUEST" && this.state.closeVoting != true) {
       if (this.state.voted.includes(playerID)) {
         return this.setState({
           voted: this.state.voted.filter(item => item !== playerID)
@@ -117,6 +120,10 @@ class Player extends Component<Props, State> {
         return this.setState({ voted: [...this.state.voted, playerID] });
       }
     }
+  };
+
+  handleChange = () => (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ closeVoting: event.target.checked });
   };
 
   render() {
@@ -129,6 +136,20 @@ class Player extends Component<Props, State> {
 
     return (
       <div>
+        {type === "ADMIN" && (
+          <div>
+            <Checkbox
+              checked={this.state.closeVoting}
+              onChange={this.handleChange()}
+              value="HELLO"
+              inputProps={{
+                "aria-label": "primary checkbox"
+              }}
+            />
+            <p>Close voting</p>
+          </div>
+        )}
+
         <Typography variant="h4" gutterBottom style={{ textAlign: "center" }}>
           {voteCount} Votes in {this.state.region}
         </Typography>
