@@ -8,6 +8,11 @@ interface Props {
   region: String;
 }
 
+interface State {
+  region: any;
+  voted: Array<String>;
+}
+
 interface Player {
   teams: String;
   participantId: String;
@@ -21,9 +26,14 @@ interface Player {
   avatarUrl: String;
 }
 
-class Player extends Component<Props, any> {
+class Player extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
+    this.state = {
+      region: null,
+      voted: []
+    };
   }
 
   Arrow = () => (
@@ -48,11 +58,23 @@ class Player extends Component<Props, any> {
     </div>
   );
 
-  Card = ({ crest, brand, region, name, votes, regionCount }: any) => {
+  Card = ({
+    crest,
+    brand,
+    region,
+    name,
+    votes,
+    regionCount,
+    playerID
+  }: any) => {
     const likePercentage = ((votes / regionCount) * 100).toFixed(2);
+    const voted: boolean = this.state.voted.includes(playerID);
 
     return (
-      <div className="card">
+      <div
+        className={"card " + (voted ? "sparkle" : "")}
+        onClick={() => this.onCardClick(region, playerID)}
+      >
         <div className="bg" />
         <div className="card-front-img">
           <img src={brand} alt="Brand" />
@@ -76,6 +98,17 @@ class Player extends Component<Props, any> {
     );
   };
 
+  onCardClick = (region: string, playerID: string) => {
+    const voteCount = this.state.voted.length;
+
+    if (voteCount < 3) {
+      this.setState({
+        region: region,
+        voted: [...this.state.voted, playerID]
+      });
+    }
+  };
+
   render() {
     const { region } = this.props;
     const { players, regionCount } = Players(region);
@@ -91,6 +124,7 @@ class Player extends Component<Props, any> {
             name={x.nickname}
             votes={x.likeCount}
             regionCount={regionCount}
+            playerID={x.participantId}
           />
         ))}
       </div>
