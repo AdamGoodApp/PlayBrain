@@ -19,7 +19,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.4",
-    "three": "^0.106.2",
+    "three": "^0.125.0",
     "typeface-roboto": "^0.0.54",
     "typescript": "3.5.3"
   },
